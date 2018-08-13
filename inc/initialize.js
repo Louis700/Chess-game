@@ -15,8 +15,8 @@ window.onload = init;
 
 function init() {
 	initCanvas();
-
 	scale = canvas.width/8;
+
 	pawnRadius = scale*5/16;
 
 	board = new Board({x: 0, y: 0}, scale);
@@ -31,8 +31,13 @@ function initCanvas() {
 	canvas = document.getElementById("gameCanvas");
 	setTargetContext(canvas.getContext("2d"));
 
-	canvas.height = Math.floor(7*window.innerHeight/8);
-	canvas.width = canvas.height;
+	if(window.innerHeight < window.innerWidth) {
+		canvas.height = Math.floor(7*window.innerHeight/8);
+		canvas.width = canvas.height;
+	} else {
+		canvas.width = Math.floor(7*window.innerWidth/8);
+		canvas.height = canvas.width;
+	}
 }
 
 function clickListener(evt) {
