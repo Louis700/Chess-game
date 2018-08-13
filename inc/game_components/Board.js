@@ -12,7 +12,7 @@ class Board {
 
 	initSquares() {
 		for(let j = 0; j < 8; j++) {
-		for(let i = 0; i < 8; i++) {
+			for(let i = 0; i < 8; i++) {
 				let squareColor;
 				let squareIndex = i + j*8;	
 
@@ -35,6 +35,43 @@ class Board {
 		}
 	}
 
+	click(pos) {
+		let squarePos = {
+			x: Math.floor(pos.x/this.scale),
+			y: Math.floor(pos.y/this.scale)
+		}
+		let squareIndex = squarePos.x + 8*squarePos.y;
+		this.deselectSquares();
+
+		this.selectedSquare = this.squares[squareIndex];
+		this.selectedSquare.select();
+
+		if(this.selectedSquare.pawn != undefined)
+			this.determinePossibleMoves(squarePos);
+
+		this.draw();
+	}
+	
+	determinePossibleMoves(squarePos) {
+		let squareIndex = squarePos.x + 8*squarePos.y;
+		
+		if(this.squares[squareIndex - 9] != undefined && this.squares[squareIndex - 9].pawn == undefined && squarePos.x > 0) {
+			this.squares[squareIndex - 9].setIsPossibleMove(true);
+		}
+	
+		if(this.squares[squareIndex - 7] != undefined && this.squares[squareIndex - 7].pawn == undefined && squarePos.y < 7) {
+			this.squares[squareIndex - 7].setIsPossibleMove(true);
+		}
+
+	}
+
+	deselectSquares() {
+		for(let square of this.squares) {
+			square.deselect();
+			square.setIsPossibleMove(false);
+		}
+	}
+	
 	addPawn(pawn) {
 		this.pawns.push(pawn);
 	}
