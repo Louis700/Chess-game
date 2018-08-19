@@ -25,9 +25,9 @@ class Pawn {
 		strokeWeight(3);
 
 		if(this.side == Side.BLACK)
-			fill(new Color(20));
+			fill(20);
 		else
-			fill(new Color(255));
+			fill(255);
 		circle(this.square.pos.x + this.square.scale/2, this.square.pos.y + this.square.scale/2, pawnRadius);
 	}
 }

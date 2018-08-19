@@ -4,20 +4,18 @@ let isStroking = true;
 let isFilling = true;
 
 function fill(color, ctx=targetContext) {
-	ctx.fillStyle = color.toString();
-	
 	if( !(color instanceof Color) )
 		color = new Color(color);
 
+	ctx.fillStyle = color.toString();
 	isFilling = true;
 }
 
 function stroke(color, ctx=targetContext) {
-	ctx.strokeStyle = color.toString();
-	
 	if( !(color instanceof Color) )
 		color = new Color(color);
 
+	ctx.strokeStyle = color.toString();
 	isStroking = true;
 }
 
