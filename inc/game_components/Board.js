@@ -30,16 +30,15 @@ class Board {
 					pawn = new Pawn(Side.WHITE);
 					this.pawns.push(pawn);
 				}
-				this.squares.push(new Square({ x: (this.pos.x + i*this.scale), y: (this.pos.y + j*this.scale) }, this.scale, squareColor, pawn));
+				this.squares.push(new Square(new Vector(this.pos.x + i*this.scale, this.pos.y + j*this.scale),
+											 this.scale, squareColor, pawn));
 			}
 		}
 	}
 
 	click(pos) {
-		let squarePos = {
-			x: Math.floor(pos.x/this.scale),
-			y: Math.floor(pos.y/this.scale)
-		}
+		let squarePos = new Vector( Math.floor(pos.x/this.scale),
+									Math.floor(pos.y/this.scale) );
 		let squareIndex = squarePos.x + 8*squarePos.y;
 		this.deselectSquares();
 
@@ -59,7 +58,7 @@ class Board {
 			this.squares[squareIndex - 9].setIsPossibleMove(true);
 		}
 	
-		if(this.squares[squareIndex - 7] != undefined && this.squares[squareIndex - 7].pawn == undefined && squarePos.y < 7) {
+		if(this.squares[squareIndex - 7] != undefined && this.squares[squareIndex - 7].pawn == undefined && squarePos.x < 7) {
 			this.squares[squareIndex - 7].setIsPossibleMove(true);
 		}
 

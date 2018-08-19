@@ -19,7 +19,7 @@ function init() {
 
 	pawnRadius = scale*5/16;
 
-	board = new Board({x: 0, y: 0}, scale);
+	board = new Board(new Vector(0, 0), scale);
 
 	background(new Color(52));
 	board.draw();
@@ -42,9 +42,7 @@ function initCanvas() {
 
 function clickListener(evt) {
 	let rect = evt.target.getBoundingClientRect();
-	let pos = {
-		x: evt.clientX - rect.left,
-		y: evt.clientY - rect.top
-	};
+	let pos = new Vector(evt.clientX - rect.left, evt.clientY - rect.top);
+
 	board.click(pos)
 }
