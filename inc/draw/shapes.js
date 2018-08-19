@@ -10,9 +10,9 @@ function strokeWeight(weight, ctx=targetContext) {
 	ctx.lineWidth = weight;
 }
 
-function border(r=0, g=r, b=g, a=1, ctx=targetContext) {
+function border(color, ctx=targetContext) {
 	noFill();
-	stroke(r, g, b, a, ctx);
+	stroke(color, ctx);
 	rect(0, 0, ctx.canvas.width, ctx.canvas.height, ctx);
 }
 

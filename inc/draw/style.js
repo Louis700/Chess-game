@@ -3,24 +3,28 @@
 let isStroking = true;
 let isFilling = true;
 
-function fill(r=0, g=r, b=g, a=1, ctx=targetContext) {
-	ctx.fillStyle = RGBAToString(r, g, b, a);
+function fill(color, ctx=targetContext) {
+	ctx.fillStyle = color.toString();
+	
+	if( !(color instanceof Color) )
+		color = new Color(color);
+
 	isFilling = true;
 }
 
-function stroke(r=0, g=r, b=g, a=1, ctx=targetContext) {
-	ctx.strokeStyle = RGBAToString(r, g, b, a);
+function stroke(color, ctx=targetContext) {
+	ctx.strokeStyle = color.toString();
+	
+	if( !(color instanceof Color) )
+		color = new Color(color);
+
 	isStroking = true;
 }
 
-function background(r=0, g=r, b=g, a=1, ctx=targetContext) {
-	fill(r, g, b, a, ctx);
+function background(color, ctx=targetContext) {
+	fill(color, ctx);
 	noStroke();
 	rect(0, 0, ctx.canvas.width, ctx.canvas.height, ctx);
-}
-
-function RGBAToString(r, g, b, a) {
-	return "rgba(" + r + "," + g + "," + b + "," + a + ")";
 }
 
 function noFill() {

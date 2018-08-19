@@ -17,17 +17,17 @@ class Board {
 				let squareIndex = i + j*8;	
 
 				if( (i + j)%2 == 0)
-					squareColor = SideColor.WHITE;
+					squareColor = Side.WHITE;
 				else
-					squareColor = SideColor.BLACK;
+					squareColor = Side.BLACK;
 
 				let pawn = undefined;
 
-				if(squareIndex < 24 && squareColor == SideColor.BLACK) {
-					pawn = new Pawn(SideColor.BLACK);
+				if(squareIndex < 24 && squareColor == Side.BLACK) {
+					pawn = new Pawn(Side.BLACK);
 					this.pawns.push(pawn);
-				} else if(squareIndex >= 40 && squareColor == SideColor.WHITE) {
-					pawn = new Pawn(SideColor.WHITE);
+				} else if(squareIndex >= 40 && squareColor == Side.WHITE) {
+					pawn = new Pawn(Side.WHITE);
 					this.pawns.push(pawn);
 				}
 				this.squares.push(new Square({ x: (this.pos.x + i*this.scale), y: (this.pos.y + j*this.scale) }, this.scale, squareColor, pawn));

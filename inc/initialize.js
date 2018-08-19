@@ -5,9 +5,9 @@ let canvas;
 let scale;
 let pawnRadius;
 
-let white = {r: 234, g: 233, b: 210};
-let black = {r: 75, g: 115, b: 153};
-let selectColor = {r: 255, g: 255, b:50, a: 0.625};
+let white = new Color(234, 233, 210);
+let black = new Color(75, 115, 153);
+let selectColor = new Color(255, 255, 50, 0.625);
 
 let board;
 
@@ -21,7 +21,7 @@ function init() {
 
 	board = new Board({x: 0, y: 0}, scale);
 
-	background(52, 52, 52);
+	background(new Color(52));
 	board.draw();
 
 	canvas.addEventListener("click", clickListener);

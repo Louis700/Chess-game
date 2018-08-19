@@ -69,7 +69,8 @@ function getFontDimensions(size, sizeMode) {
 		fontDim.x = getWidthOfChar(size, FONTSIZE_MODE.FONTSIZE);
 		fontDim.y = getHeightOfChar(size, FONTSIZE_MODE.FONTSIZE);
 	} else
-		return error("The value entered is wrong, it's necessary to know the width, the height or the fontsize to deduce the font dimensions !", new SimpleVector(1, 1));
+		return error("The value entered is wrong, it's necessary to know the width, the height or the fontsize to deduce the font dimensions !",
+					 new SimpleVector(1, 1));
 
 	return fontDim;
 }
