@@ -22,12 +22,15 @@ class Square {
 	drawBackground() {
 		noStroke();
 
-		if(this.isSelected)
-			fill(selectColor);
-		else if(this.color == Side.BLACK)
+		if(this.color == Side.BLACK)
 			fill(black);
 		else
 			fill(white);
+
+		rect(this.pos.x, this.pos.y, this.scale, this.scale);
+
+		if(this.isSelected)
+			fill(selectColor);
 
 		rect(this.pos.x, this.pos.y, this.scale, this.scale);
 
