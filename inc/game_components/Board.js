@@ -16,30 +16,30 @@ class Board {
 	initSquares() {
 		for(let j = 0; j < 8; j++) {
 			for(let i = 0; i < 8; i++) {
-				let squareColor;
 				let squareIndex = i + j*8;	
+				let squareColor = ((i + j)%2 == 0) ? Side.WHITE : Side.BLACK;
+				let pawn = this.generatePawn(squareIndex, squareColor);
 
-				if( (i + j)%2 == 0)
-					squareColor = Side.WHITE;
-				else
-					squareColor = Side.BLACK;
-
-				let pawn = undefined;
-
-				if(squareColor == Side.BLACK) {
-					if(squareIndex < 24) {
-						pawn = new Pawn(Side.BLACK);
-						this.pawns.push(pawn);
-					} else if(squareIndex >= 40) {
-						pawn = new Pawn(Side.WHITE);
-						this.pawns.push(pawn);
-					}
-				}
 				this.squares.push(new Square(new Vector(this.pos.x + i*this.scale, this.pos.y + j*this.scale),
-											 this.scale, squareColor, pawn));
-				this.squaresToUpdate.push(this.squares[this.squares.length - 1]);
+											 			this.scale, squareColor, pawn));
+				this.addSquareToUpdate(this.squares[this.squares.length - 1]);
 			}
 		}
+	}
+
+	generatePawn(squareIndex, squareColor) {
+		let pawn = undefined;
+
+		if(squareColor == Side.BLACK) {
+			if(squareIndex < 24) {
+				pawn = new Pawn(Side.BLACK);
+				this.pawns.push(pawn);
+			} else if(squareIndex >= 40) {
+				pawn = new Pawn(Side.WHITE);
+				this.pawns.push(pawn);
+			}
+		}
+		return pawn;
 	}
 
 	click(pos) {
@@ -70,13 +70,13 @@ class Board {
 	addPossibleMove(square) {
 		square.setIsPossibleMove(true);
 		this.possibleMoves.push(square);
-		this.squaresToUpdate.push(square);
+		this.addSquareToUpdate(square);
 	}
 
 	removePossibleMoves() {
 		for(let square of this.possibleMoves) {
 			square.setIsPossibleMove(false);
-			this.squaresToUpdate.push(square);
+			this.addSquareToUpdate(square);
 		}
 	}
 
@@ -84,15 +84,20 @@ class Board {
 		this.deselectSquare();
 		this.squares[index].select();
 		this.selectedSquare = this.squares[index];
-		this.squaresToUpdate.push(this.selectedSquare);
+		this.addSquareToUpdate(this.selectedSquare);
 	}
 
 	deselectSquare() {
 		if(this.selectedSquare != undefined) {
 			this.selectedSquare.deselect();
-			this.squaresToUpdate.push(this.selectedSquare);
+			this.addSquareToUpdate(this.selectedSquare);
 			this.selectedSquare = undefined;
 		}
+	}
+
+	addSquareToUpdate(square) {
+		if(this.squaresToUpdate.indexOf(square) < 0)
+			this.squaresToUpdate.push(square);
 	}
 
 	addPawn(pawn) {

@@ -25,6 +25,7 @@ function init() {
 	board.draw();
 
 	canvas.addEventListener("click", clickListener);
+	console.log("commit : avoid duplications in board.squaresToUpdate");
 }
 
 function initCanvas() {
