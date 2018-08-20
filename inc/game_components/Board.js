@@ -23,12 +23,14 @@ class Board {
 
 				let pawn = undefined;
 
-				if(squareIndex < 24 && squareColor == Side.BLACK) {
-					pawn = new Pawn(Side.BLACK);
-					this.pawns.push(pawn);
-				} else if(squareIndex >= 40 && squareColor == Side.WHITE) {
-					pawn = new Pawn(Side.WHITE);
-					this.pawns.push(pawn);
+				if(squareColor == Side.BLACK) {
+					if(squareIndex < 24) {
+						pawn = new Pawn(Side.BLACK);
+						this.pawns.push(pawn);
+					} else if(squareIndex >= 40) {
+						pawn = new Pawn(Side.WHITE);
+						this.pawns.push(pawn);
+					}
 				}
 				this.squares.push(new Square(new Vector(this.pos.x + i*this.scale, this.pos.y + j*this.scale),
 											 this.scale, squareColor, pawn));
