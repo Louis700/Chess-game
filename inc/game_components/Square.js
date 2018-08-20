@@ -21,23 +21,20 @@ class Square {
 
 	drawBackground() {
 		noStroke();
-		if(this.color == Side.BLACK)
+
+		if(this.isSelected)
+			fill(selectColor);
+		else if(this.color == Side.BLACK)
 			fill(black);
 		else
 			fill(white);
 
 		rect(this.pos.x, this.pos.y, this.scale, this.scale);
 
-		if(this.isSelected) 
-			fill(selectColor);
-
 		if(this.isPossibleMove) {
-			if(this.pawn == undefined)
-				fill( new Color(0, 0, 255, 0.4) );
-			else
-				fill( new Color(255, 0, 0, 0.4) );
+			fill(new Color(10, 10, 10, 0.4));
+			circle(this.pos.x + this.scale/2, this.pos.y + this.scale/2, this.scale/5);
 		}
-		rect(this.pos.x, this.pos.y, this.scale, this.scale);
 	}
 
 	select() {
