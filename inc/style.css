@@ -10,5 +10,10 @@ body {
 canvas {
 	border-radius: 3px;
 	border: 0px solid black;
-	cursor: pointer;
+}
+
+@media only screen and (min-width: 1000px) {
+	canvas {
+		cursor: pointer;
+	}
 }
